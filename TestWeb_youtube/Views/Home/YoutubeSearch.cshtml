@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model returnObject;
+
+
+<div class="row">
+@foreach( var v in Model.videos)
+{
+
+    <div class="card col-3" >
+        <a href="https://www.youtube.com/embed/@v.videoID">
+            <img src="@v.url" class="card-img-top" >
+        </a>
+       <div class="card-body">
+              <h5 class="card-title">@v.Title</h5>
+               <p class="card-text">@v.Description</p>
+               <a href="https://www.youtube.com/embed/@v.videoID" class="btn btn-primary">Play</a>
+       </div>
+    </div>
+}
+</div>
+
+
+<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/v.videoID" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+     <div class="panal">
+    <div class="panal"></div>
+</div>
+<a href="https://www.youtube.com/embed/v.videoID">
+        <img src="v.url" />
+</a>
+
+    -->
