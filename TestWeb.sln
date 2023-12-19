@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb_youtube", "TestWeb_youtube\TestWeb_youtube.csproj", "{1B5ED7A4-3BE5-4021-99CB-8EE6EB0BE35D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWeb_youtube", "TestWeb_youtube\TestWeb_youtube.csproj", "{1B5ED7A4-3BE5-4021-99CB-8EE6EB0BE35D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeWeb", "EmployeeWeb\EmployeeWeb.csproj", "{A5BB37AE-531C-4996-8FC0-BBEBF0921122}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1B5ED7A4-3BE5-4021-99CB-8EE6EB0BE35D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B5ED7A4-3BE5-4021-99CB-8EE6EB0BE35D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B5ED7A4-3BE5-4021-99CB-8EE6EB0BE35D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BB37AE-531C-4996-8FC0-BBEBF0921122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BB37AE-531C-4996-8FC0-BBEBF0921122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BB37AE-531C-4996-8FC0-BBEBF0921122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BB37AE-531C-4996-8FC0-BBEBF0921122}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
