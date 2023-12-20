@@ -50,4 +50,8 @@ From Employees emp
      left join Departments Dept on Dept.Department_ID = Emp.Department_id
      left join (select Employee_id MgrNo
                      , First_Name || ', ' || Last_Name MgrName 
-                  from employees) mgr on mgr.MgrNo = Emp.MANAGER_ID     
+                  from employees) mgr on mgr.MgrNo = Emp.MANAGER_ID  ;
+
+
+Insert Into Emp (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, HIRE_DATE, SALARY, DEPARTMENT_ID, MANAGER_ID)
+Values(001,'Fname','Lname',to_date('hiredate','mm/dd/yyyy'), 1023, 023,201);

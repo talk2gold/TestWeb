@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeWeb.Models
 {
@@ -35,7 +36,7 @@ namespace EmployeeWeb.Models
         public int EmpNo { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public DateTime BirthDate { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime JoinDate { get; set; }
         public decimal Salary { get; set; }
         public int MgrNo { get; set; }
@@ -43,8 +44,18 @@ namespace EmployeeWeb.Models
 
         public IEnumerable<SelectListItem> Depts { get; set; }
         public IEnumerable<SelectListItem> Managers { get; set; }
+        public List<student> std { get; set; }
+        public EmployeeUpsertVM()
+        {
+            std = new List<student>();
+        }
 
-     
+
+    }
+    public class student
+    {
+        public int id { get; set; }
+        public string Name { get; set; }
     }
 
     public class Departement

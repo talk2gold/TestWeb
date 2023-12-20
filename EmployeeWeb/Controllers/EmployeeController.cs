@@ -26,9 +26,10 @@ namespace EmployeeWeb.Controllers
                             , Emp.Salary Salary, Emp.Hire_Date JoinDate
                             , Dept.Department_Name DeptName
                             , mgr.First_Name || ', ' || mgr.Last_Name MgrName
-                            From Employees emp
+                            From emp emp
                                  left join Departments Dept on Dept.Department_ID = Emp.Department_id
                                  left join Employees mgr on mgr.Employee_id = emp.Manager_ID  
+                            order by 2
                           ";
 
             IEnumerable<EmployeeVM> emplist = _db.Query<EmployeeVM>(sql);
@@ -53,7 +54,7 @@ namespace EmployeeWeb.Controllers
             //get manager
             sql = @"Select
                           mgr.Employee_id MrgId, mgr.First_Name || ', ' || mgr.Last_Name MgrName
-                     From Employees mgr order by 2
+                     From emp mgr order by 2
                    ";
             IEnumerable<Manager> emplist = _db.Query<Manager>(sql);
             empUpsert.Managers = emplist.Select(a => new SelectListItem
@@ -67,10 +68,20 @@ namespace EmployeeWeb.Controllers
         [HttpPost]
         public ActionResult Create(EmployeeUpsertVM empUpsert)
         {
-            int empno = _db.Query<int>("select max(Employee_id) +1 empno from Employees");
+            string sql="";
+            sql = "select max(Employee_id) +1 empno from Emp";
+            int empno = _db.QuerySingle<int>(sql);
 
-            string sql = "Insert Into Employee(employee_id) values("");
-                return View(empUpsert);
+            sql = @"
+                  Insert Into Emp ( FIRST_NAME, LAST_NAME, HIRE_DATE, SALARY, DEPARTMENT_ID, MANAGER_ID)
+                  Values('" + empUpsert.FirstName + "', '" + empUpsert.LastName + "', TO_DATE('" + String.Format("{0:yyyy-MM-dd}", empUpsert.JoinDate)  + "','yyyy-mm-dd'), " + empUpsert.Salary + "," + empUpsert.DeptID + ", " + empUpsert.MgrNo + ")";
+            int countNr = _db.Execute(sql);
+            if (countNr > 0) 
+            {
+                return RedirectToAction( "EmployeeList", "Employee");
+            }
+            ModelState.AddModelError(string.Empty, "Database Insertion Error");
+            return View(empUpsert);
         }
 
         public ActionResult Edit(EmployeeUpsertVM empUpsert)
@@ -103,5 +114,29 @@ namespace EmployeeWeb.Controllers
 
             return View(empUpsert);
         }
+        
+        public IActionResult AddEmployee()
+        {
+            EmployeeUpsertVM newEmp = new();
+            string sql;
+       
+
+            //get manager
+            sql = @"Select
+                          mgr.Employee_id MrgId, mgr.First_Name || ', ' || mgr.Last_Name MgrName
+                     From Employees mgr order by 2
+                   ";
+            IEnumerable<Manager> emplist = _db.Query<Manager>(sql);
+            newEmp.Managers = emplist.Select(a => new SelectListItem
+            {
+                Text = a.MgrName,
+                Value = a.MrgId.ToString(),
+            });
+
+
+            return View(newEmp);
+            
+        }
+
     }
 }
