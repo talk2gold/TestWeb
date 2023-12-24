@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeWeb.Models
@@ -23,7 +24,7 @@ namespace EmployeeWeb.Models
     {
         public int EmpNo { get; set; }
         public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
+        public string? LastName { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; }
         public DateTime JoinDate { get; set; }
         public decimal Salary { get; set; }
@@ -34,15 +35,20 @@ namespace EmployeeWeb.Models
     public class EmployeeUpsertVM   //Update /Insert
     {
         public int EmpNo { get; set; }
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
+        
+        [Required]
+        [MaxLength(50)]
+        public string FirstName { get; set; } = string.Empty;       
+        public string? LastName { get; set; } = string.Empty;
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime JoinDate { get; set; }
         public decimal Salary { get; set; }
         public int MgrNo { get; set; }
         public int DeptID { get; set; }
-
+        [ValidateNever]
         public IEnumerable<SelectListItem> Depts { get; set; }
+        [ValidateNever]
         public IEnumerable<SelectListItem> Managers { get; set; }
         public List<student> std { get; set; }
         public EmployeeUpsertVM()

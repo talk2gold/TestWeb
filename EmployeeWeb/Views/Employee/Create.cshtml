@@ -4,16 +4,23 @@
 @{
 }
 @model EmployeeUpsertVM
-<div>Create Employee</div>
+<script type="text/javascript">
+    function disabledValidation() {
+        ValidatorEnable(document.getElementById('<%=LastName%>'), false);
+    }
+</script>
+<div>Create Employee 123 </div>
 <form method="post" class="row">
     <div class="p-3"> 
         <div class="form-floating py-1 col-12">
             <input asp-for="FirstName" class="form-control border shardow" />
             <label asp-for="FirstName" class="ms-2"></label>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="form-floating py-1 col-12">
-            <input asp-for="LastName" class="form-control border shardow" />
+            <input id="LastName" asp-for="LastName" class="form-control border shardow"  />
             <label asp-for="LastName" class="ms-2"></label>
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
         <div class="form-floating py-1 col-12">
             <input asp-for="Salary" class="form-control border shardow" />
@@ -47,3 +54,11 @@
     </div>
 
 </form>
+
+@section Scripts {
+  
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
+   
